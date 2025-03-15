@@ -1,7 +1,13 @@
-
+// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
 
 (function (modules, entry, mainEntry, parcelRequireName, globalName) {
-
+  /* eslint-disable no-undef */
   var globalObject =
     typeof globalThis !== 'undefined'
       ? globalThis
@@ -12,15 +18,15 @@
       : typeof global !== 'undefined'
       ? global
       : {};
+  /* eslint-enable no-undef */
 
-
-
+  // Save the require from previous bundle to this closure if any
   var previousRequire =
     typeof globalObject[parcelRequireName] === 'function' &&
     globalObject[parcelRequireName];
 
   var cache = previousRequire.cache || {};
-
+  // Do not use `require` to prevent Webpack from trying to bundle this call
   var nodeRequire =
     typeof module !== 'undefined' &&
     typeof module.require === 'function' &&
@@ -29,7 +35,9 @@
   function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
-
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
         var currentRequire =
           typeof globalObject[parcelRequireName] === 'function' &&
           globalObject[parcelRequireName];
@@ -37,10 +45,15 @@
           return currentRequire(name, true);
         }
 
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
         if (previousRequire) {
           return previousRequire(name, true);
         }
 
+        // Try the node require function if it exists.
         if (nodeRequire && typeof name === 'string') {
           return nodeRequire(name);
         }
@@ -110,20 +123,21 @@
   }
 
   if (mainEntry) {
-
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
     var mainExports = newRequire(mainEntry);
 
-
+    // CommonJS
     if (typeof exports === 'object' && typeof module !== 'undefined') {
       module.exports = mainExports;
 
-
+      // RequireJS
     } else if (typeof define === 'function' && define.amd) {
       define(function () {
         return mainExports;
       });
 
-
+      // <script>
     } else if (globalName) {
       this[globalName] = mainExports;
     }
@@ -137,8 +151,53 @@ var HMR_ENV_HASH = "d6ea1d42532a7575";
 var HMR_USE_SSE = false;
 module.bundle.HMR_BUNDLE_ID = "890e741a975ef6c8";
 "use strict";
-
- var OVERLAY_ID = '__parcel__error__overlay__';
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
+import type {
+  HMRAsset,
+  HMRMessage,
+} from '@parcel/reporter-dev-server/src/HMRServer.js';
+interface ParcelRequire {
+  (string): mixed;
+  cache: {|[string]: ParcelModule|};
+  hotData: {|[string]: mixed|};
+  Module: any;
+  parent: ?ParcelRequire;
+  isParcelRequire: true;
+  modules: {|[string]: [Function, {|[string]: string|}]|};
+  HMR_BUNDLE_ID: string;
+  root: ParcelRequire;
+}
+interface ParcelModule {
+  hot: {|
+    data: mixed,
+    accept(cb: (Function) => void): void,
+    dispose(cb: (mixed) => void): void,
+    // accept(deps: Array<string> | string, cb: (Function) => void): void,
+    // decline(): void,
+    _acceptCallbacks: Array<(Function) => void>,
+    _disposeCallbacks: Array<(mixed) => void>,
+  |};
+}
+interface ExtensionContext {
+  runtime: {|
+    reload(): void,
+    getURL(url: string): string;
+    getManifest(): {manifest_version: number, ...};
+  |};
+}
+declare var module: {bundle: ParcelRequire, ...};
+declare var HMR_HOST: string;
+declare var HMR_PORT: string;
+declare var HMR_ENV_HASH: string;
+declare var HMR_SECURE: boolean;
+declare var HMR_USE_SSE: boolean;
+declare var chrome: ExtensionContext;
+declare var browser: ExtensionContext;
+declare var __parcel__import__: (string) => Promise<void>;
+declare var __parcel__importScripts__: (string) => Promise<void>;
+declare var globalThis: typeof self;
+declare var ServiceWorkerGlobalScope: Object;
+*/ var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);

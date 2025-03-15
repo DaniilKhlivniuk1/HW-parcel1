@@ -1,11 +1,11 @@
 {
   "name": "hw-parcel1",
   "version": "1.0.0",
-
+  "homepage": "https://DaniilKhlivniuk1.github.io/HW-parcel1",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx parcel src/index.html",
-    "build": "parcel build src/index.html ",
+    "build": "parcel build src/index.html --public-url ./",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
