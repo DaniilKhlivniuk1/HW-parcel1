@@ -1,7 +1,7 @@
 {
   "name": "hw-parcel1",
   "version": "1.0.0",
-  "homepage": "https://github.com/DaniilKhlivniuk1/HW-parcel1.git",
+  "homepage": "https://daniilkhlivniuk1.github.io/HW-parcel1/",
 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
