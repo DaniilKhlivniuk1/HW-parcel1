@@ -1,0 +1,2 @@
+let t=[];function e(){let e=document.getElementById("task-list");e.innerHTML="";let n=localStorage.getItem("tasks");n&&(t=JSON.parse(n)),t.forEach(t=>{let n=document.createElement("li");n.textContent=t,e.appendChild(n)})}const n=document.getElementById("task-form"),a=document.getElementById("task-input");document.getElementById("task-list"),document.addEventListener("DOMContentLoaded",e),n.addEventListener("submit",n=>{var l;n.preventDefault(),l=a.value,t.push(l),localStorage.setItem("tasks",JSON.stringify(t)),a.value="",e()});
+//# sourceMappingURL=index.63c3e526.js.map
